@@ -10,7 +10,8 @@ module.exports = {
       mainYellow: "#EDA415",
       grayText: "#3A3A3A",
       iconColor: "#292D32",
-      grayLine: "#BDBDBD"
+      grayLine: "#BDBDBD",
+      error: "#FF0000"
     }
   },
   plugins: [],

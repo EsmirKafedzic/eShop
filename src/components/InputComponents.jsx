@@ -6,7 +6,7 @@ function InputComponents() {
       <input
         type="text"
         placeholder="Search product"
-        className="pl-[25px] py-[14px]"
+        className="pl-[25px] py-[14px] "
       />
       <button className="bg-mainYellow text-[#fff] px-[30px] rounded-[20px]">
         Search
