@@ -5,10 +5,12 @@ import UserService from "../services/userService";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loggedUser } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   //formik
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +30,9 @@ function LoginPage() {
             // console.log(res.data);
             toast.success("User has successfully logged in");
             dispatch(loggedUser(res.data));
+            setTimeout(() => {
+              navigate("/");
+            }, 2000);
           }
         })
         .catch((err) => console.log(err));

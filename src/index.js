@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage/>
       }
-    ],
+    ]
   }
   
 ]);
@@ -37,6 +37,6 @@ root.render(
     {/* <Provider store={store}/> */}
       <Provider store={store}> {/* Wrap your App component with Provider */}
     <RouterProvider router={router} />
-  </Provider>,
+  </Provider>
   </React.StrictMode>
 );
