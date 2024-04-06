@@ -4,8 +4,8 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
-    colors: {
+    extend: {
+      colors: {
       mainBlue: "#003F62",
       mainYellow: "#EDA415",
       grayText: "#3A3A3A",
@@ -13,6 +13,8 @@ module.exports = {
       grayLine: "#BDBDBD",
       error: "#FF0000"
     }
+    },
+    
   },
   plugins: [],
 }

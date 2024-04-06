@@ -8,7 +8,8 @@ const userSlice = createSlice({
     reducers: {
             //logg user
             loggedUser: (state, action) => {
-                state.user = action.payload;
+            state.user = action.payload;
+            console.log(state.user);
                 localStorage.setItem("user", JSON.stringify(action.payload));
                 localStorage.setItem("userToken", JSON.stringify(action.payload.token));
         }
