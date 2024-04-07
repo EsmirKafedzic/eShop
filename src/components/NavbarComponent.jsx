@@ -7,7 +7,7 @@ import { FaUser, FaHeart, FaShoppingCart } from "react-icons/fa";
 
 function NavbarComponent() {
   return (
-    <div className="bg-mainBlue h-[100px]">
+    <div className="bg-mainBlue h-[100px] px-[20px] md:px-0">
       <div className="container mx-auto flex justify-between items-center h-full">
         <Link to="/">
           <img src={logo} className="h-[60px] w-[120px]" alt="" />
