@@ -48,22 +48,31 @@ function ProductDetailsPage() {
 
         <div className="w-[50%]">
           <div>
-            <h3 className="text-xl text-mainBlue font-bold">{product.title}</h3>
-            <p className="text-xl">${product.price}</p>
+            <h3 className="text-3xl text-mainBlue font-bold">
+              {product.title}
+            </h3>
+            <p className="text-xl mt-5">
+              {" "}
+              Price:
+              <span className="px-2 font-bold">${product.price}</span>
+            </p>
 
-            <Stack>
-              <Rating
-                name="half-rating-read"
-                value={value}
-                precision={0.5}
-                readOnly
-              />
-            </Stack>
-            <div className="flex items-center gap-[10px]">
-              <p>Availabilitiy</p>
+            <div className="flex mt-4">
+              <h1 className="text-xl">Rating: </h1>
+              <Stack>
+                <Rating
+                  name="half-rating-read"
+                  value={value}
+                  precision={0.5}
+                  readOnly
+                />
+              </Stack>
+            </div>
+            <div className="flex items-center gap-[10px] mt-4">
+              <p className="text-xl">Availabilitiy:</p>
               {product.stock > 1 ? (
                 <div className="flex items-center gap-2 text-green-400">
-                  <FaCheck />
+                  <FaCheck size={32} />
                   <span>In stock</span>
                 </div>
               ) : (
@@ -73,23 +82,31 @@ function ProductDetailsPage() {
                 </div>
               )}
             </div>
-            <h3>
+            <h3 className="text-xl mt-4">
               Hurry up only <span className="font-bold">{product.stock} </span>{" "}
               left on the stock
             </h3>
           </div>
-          <div>
-            <h3>Total price: ${product.price}</h3>
-            <div className="flex">
-              <p>Quantitiy:</p>
-              <button>+</button>
-              <span>0</span>
-              <button>-</button>
+          <div className="mt-4">
+            <h3 className="text-xl">
+              Total price: <span className="font-bold">${product.price}</span>
+            </h3>
+            <div className="flex mt-4 items-center w-[220px] justify-between">
+              <p className="text-xl">Quantitiy:</p>
+              <div>
+                <button className=" bg-gray-300 w-[40px]">+</button>
+                <span className="border border-t-gray-300 border-b-gray-300 px-3">
+                  0
+                </span>
+                <button className="bg-gray-300 w-[40px]">-</button>
+              </div>
             </div>
 
-            <div>
-              <Link>Add to chart</Link>
-              <Link>
+            <div className="mt-6 flex items-center gap-10">
+              <Link className="bg-yellow-400 px-5 py-3 rounded-3xl text-blue-800 hover:bg-green-400 hover:text-white">
+                Add to chart
+              </Link>
+              <Link className="text-3xl ">
                 <CiHeart />
               </Link>
             </div>
