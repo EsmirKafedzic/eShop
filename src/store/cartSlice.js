@@ -20,7 +20,7 @@ const cartSlice = createSlice({
 
             if (findIndex === null) {
                 coppyArray.push({
-                    ...action.payload,
+                    ...action.payload, 
                     count: 1,
                     cartTotal: action.payload.price
                 })
@@ -31,9 +31,16 @@ const cartSlice = createSlice({
             }
 
             state.cart = coppyArray;
+        },
+        setPriceHandler: (state, action) => {
+            const { increment, index } = action.payload;
+            console.log(increment, index);
+            let copyArray = [...state.cart];
+            copyArray[index].cartTotal += copyArray[index].price * increment;
+            state.cart = copyArray;
         }
     }
 })
 
-export const { saveProductHandler } = cartSlice.actions;
+export const { saveProductHandler,setPriceHandler } = cartSlice.actions;
 export default cartSlice.reducer;
