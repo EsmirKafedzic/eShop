@@ -4,14 +4,15 @@ const userSlice = createSlice({
     name: "user",
     initialState: {
         user: {},
+        logged: false
     },
     reducers: {
             //logg user
-            loggedUser: (state, action) => {
+        loggedUser: (state, action) => {
+            state.logged = true;
             state.user = action.payload;
-            console.log(state.user);
                 localStorage.setItem("user", JSON.stringify(action.payload));
-                localStorage.setItem("userToken", JSON.stringify(action.payload.token));
+            localStorage.setItem("userToken", JSON.stringify(action.payload.token));
         }
         //loggout user
         }
