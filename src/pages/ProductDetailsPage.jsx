@@ -8,12 +8,15 @@ import Stack from "@mui/material/Stack";
 import { FaCheck } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { CiHeart } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { saveProductHandler } from "../store/cartSlice";
 
 function ProductDetailsPage() {
   const [product, setProduct] = useState({});
   const [currentImage, setCurrentImage] = useState(0);
   const [value, setValues] = useState(1);
   let { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     ProductService.getSingleProduct(id)
@@ -24,8 +27,12 @@ function ProductDetailsPage() {
       .catch((err) => console.log(err));
   }, []);
 
+  function productHanlder() {
+    dispatch(saveProductHandler(product));
+  }
+
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh]" key={product.id}>
       <div className="container mx-auto flex mt-[50px] gap-[20px]">
         <div className="w-[50%] flex flex-col">
           <img
@@ -36,6 +43,7 @@ function ProductDetailsPage() {
             {product.images?.map((img, index) => {
               return (
                 <img
+                  key={index}
                   src={img}
                   alt=""
                   className="w-[100px] h-[100px] border-2 border-mainBlue p-2 rounded-[20px] cursor-pointer"
@@ -46,16 +54,20 @@ function ProductDetailsPage() {
           </div>
         </div>
 
-        <div className="w-[50%]">
+        <div className="w-[50%] flex flex-col justify-between mb-32">
           <div>
-            <h3 className="text-3xl text-mainBlue font-bold">
-              {product.title}
-            </h3>
-            <p className="text-xl mt-5">
-              {" "}
-              Price:
-              <span className="px-2 font-bold">${product.price}</span>
-            </p>
+            <div>
+              <h3 className="text-3xl text-mainBlue font-bold">
+                {product.title}
+              </h3>
+            </div>
+            <div>
+              <p className="text-xl mt-5">
+                {" "}
+                Price:
+                <span className="px-2 font-bold">${product.price}</span>
+              </p>
+            </div>
 
             <div className="flex mt-4">
               <h1 className="text-xl">Rating: </h1>
@@ -87,29 +99,32 @@ function ProductDetailsPage() {
               left on the stock
             </h3>
           </div>
-          <div className="mt-4">
-            <h3 className="text-xl">
-              Total price: <span className="font-bold">${product.price}</span>
-            </h3>
-            <div className="flex mt-4 items-center w-[220px] justify-between">
-              <p className="text-xl">Quantitiy:</p>
-              <div>
-                <button className=" bg-gray-300 w-[40px]">+</button>
-                <span className="border border-t-gray-300 border-b-gray-300 px-3">
-                  0
-                </span>
-                <button className="bg-gray-300 w-[40px]">-</button>
-              </div>
-            </div>
 
-            <div className="mt-6 flex items-center gap-10">
-              <Link className="bg-yellow-400 px-5 py-3 rounded-3xl text-blue-800 hover:bg-green-400 hover:text-white">
-                Add to chart
-              </Link>
-              <Link className="text-3xl ">
-                <CiHeart />
-              </Link>
+          <h3 className="text-xl">
+            Total price: <span className="font-bold">${product.price}</span>
+          </h3>
+          <div className="flex items-center w-[220px] justify-between">
+            <p className="text-xl">Quantitiy:</p>
+            <div>
+              <button className=" bg-gray-300 w-[40px]">+</button>
+              <span className="border border-t-gray-300 border-b-gray-300 px-3">
+                0
+              </span>
+              <button className="bg-gray-300 w-[40px]">-</button>
             </div>
+          </div>
+
+          <div className="mt-6 flex items-center gap-10">
+            <Link
+              to="/cartPoroducts"
+              className="bg-yellow-400 px-5 py-3 rounded-3xl text-blue-800 hover:bg-green-400 hover:text-white"
+              onClick={() => productHanlder()}
+            >
+              Add to chart
+            </Link>
+            <Link className="text-3xl ">
+              <CiHeart />
+            </Link>
           </div>
         </div>
       </div>
