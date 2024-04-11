@@ -4,17 +4,20 @@ import ProductService from "../services/productService";
 // import * as React from "react";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
+import { FaHeart } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { CiHeart } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveProductHandler } from "../store/cartSlice";
+import { saveFavoriteHandler } from "../store/favoriteSlice";
 
 function ProductDetailsPage() {
   const [product, setProduct] = useState({});
   const [currentImage, setCurrentImage] = useState(0);
   const [value, setValues] = useState(1);
+  const { favorite } = useSelector((state) => state.favoriteStore);
+  const [favIcon, setFavIcon] = useState(null);
   let { id } = useParams();
   const dispatch = useDispatch();
 
@@ -30,6 +33,20 @@ function ProductDetailsPage() {
   function productHanlder() {
     dispatch(saveProductHandler(product));
   }
+
+  function favoriteHandler() {
+    dispatch(saveFavoriteHandler(product));
+    console.log(product);
+  }
+
+  useEffect(() => {
+    favorite.find((el) => {
+      if (el.id === parseInt(id)) {
+        setFavIcon(el.id);
+        return;
+      }
+    });
+  }, [favorite]);
 
   return (
     <div className="h-[100vh]" key={product.id}>
@@ -122,8 +139,16 @@ function ProductDetailsPage() {
             >
               Add to chart
             </Link>
-            <Link className="text-3xl ">
-              <CiHeart />
+            <Link
+              to="/favoriteProducts"
+              className="text-3xl "
+              onClick={() => favoriteHandler()}
+            >
+              {favIcon === parseInt(id) ? (
+                <FaHeart size={32} color="" />
+              ) : (
+                <CiHeart />
+              )}
             </Link>
           </div>
         </div>

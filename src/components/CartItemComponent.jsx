@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setPriceHandler } from "../store/cartSlice";
+import { Link } from "react-router-dom";
 
 function CartItemComponent({ item, index }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex items-center gap-4 w-full justify-between">
-      <img src={item.thumbnail} alt="" className="w-[100px] h-[100px]" />
+    <div className="flex items-center gap-4 w-full justify-between border border-mainBlue rounded-[20px] p-5">
+      <Link to={`/productDetails/${item.id}`}>
+        <img src={item.thumbnail} alt="" className="w-[100px] h-[100px]" />
+      </Link>
+
       <div>
         <p>{item.title}</p>
         <p>{item.category}</p>
